@@ -85,7 +85,7 @@ class BehaviorOphysSession(LazyPropertyMixin):
 
 if __name__ == "__main__":
 
-    # from allensdk.brain_observatory.behavior.behavior_ophys_api.behavior_ophys_nwb_api import BehaviorOphysNwbApi
+    from allensdk.brain_observatory.behavior.behavior_ophys_api.behavior_ophys_nwb_api import BehaviorOphysNwbApi
 
     # blacklist = [797257159, 796306435, 791453299, 809191721, 796308505, 798404219] #
     # api_list = []
@@ -128,10 +128,13 @@ if __name__ == "__main__":
         # print(session.running_speed)
 
 
-    # nwb_filepath = '/home/nicholasc/projects/allensdk/tmp.nwb'
-    # session = BehaviorOphysSession(789359614)
-    # nwb_api = BehaviorOphysNwbApi(nwb_filepath)
-    # nwb_api.save(session)
+    session = BehaviorOphysSession.from_LIMS(798392580)
+    print(len(session.ophys_timestamps))
+    raise
+
+    nwb_filepath = '/home/nicholasc/tmp.nwb'
+    nwb_api = BehaviorOphysNwbApi(nwb_filepath)
+    nwb_api.save(session)
 
     # print(session.cell_specimen_table)
 
@@ -141,17 +144,17 @@ if __name__ == "__main__":
     
     # assert session == session2
 
-    session = BehaviorOphysSession.from_LIMS(789359614)
+    session = BehaviorOphysSession(api=BehaviorOphysNwbApi(nwb_filepath))
     # session.segmentation_mask_image
     # session.stimulus_timestamps
     # session.ophys_timestamps
     # session.metadata
-    # session.dff_traces
+    session.dff_traces
     # session.cell_specimen_table
     # running_speed
     # print(session.stimulus_index)
     # session.running_data_df
-    print(session.stimulus_presentations)
+    # print(session.stimulus_presentations)
     # session.stimulus_templates
     # session.stimulus_index
     # session.licks

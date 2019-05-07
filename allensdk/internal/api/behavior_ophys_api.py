@@ -41,12 +41,14 @@ class BehaviorOphysLimsApi(OphysLimsApi, BehaviorOphysApiBase):
         dff_traces = self.get_raw_dff_data()
         number_of_cells, number_of_dff_frames = dff_traces.shape
         num_of_timestamps = len(ophys_timestamps)
+        print(number_of_dff_frames, num_of_timestamps)
+        raise
         if number_of_dff_frames < num_of_timestamps:
             ophys_timestamps = ophys_timestamps[:number_of_dff_frames]
         elif number_of_dff_frames == num_of_timestamps:
             pass
         else:
-            raise RuntimeError('dff_frames is shorter than timestamps')
+            raise RuntimeError('dff_frames is longer than timestamps')
 
         return ophys_timestamps
 
